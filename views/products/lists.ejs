@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products Page</title>
+  </head>
+  <body>
+    <h1>Products Lists</h1>
+    <ul>
+      <% for (let prod of products) { %>
+      <a href="/products/<%= prod._id %>">
+        <li>
+          <p>Name : <%= prod.name %>,</p>
+          <p>Brand : <%= prod.brand %></p>
+        </li>
+      </a>
+      <%}%>
+    </ul>
+  </body>
+</html>

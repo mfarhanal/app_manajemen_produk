@@ -4,6 +4,10 @@ const methodOverride = require("method-override");
 const path = require("path");
 const app = express();
 
+// Import models
+const Product = require("./models/product");
+
+// Connect to Database
 async function connectDB() {
   try {
     await mongoose.connect("mongodb://127.0.0.1/manajemen_app");
@@ -14,8 +18,39 @@ async function connectDB() {
 }
 connectDB();
 
+// Setting view engine
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
 app.get("/", (req, res) => {
   res.send("Welcome to manajemen App");
+});
+
+app.get("/products", async (req, res) => {
+  try {
+    // console.log(req.query);
+    const { category } = req.query;
+    if (category) {
+      const products = await Product.find({ category }); //Memfilter product berdasarkan category
+      return res.render("products/lists", { products });
+    }
+    const products = await Product.find({});
+    // console.log(products);
+    res.render("products/lists", { products });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+app.get("/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    // console.log(product);
+    res.render("products/details", { product });
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 
 app.listen(3000, () => {
