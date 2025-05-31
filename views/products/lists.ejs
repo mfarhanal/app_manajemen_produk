@@ -4,18 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products Page</title>
+    <link rel="stylesheet" href="/main.css" />
   </head>
   <body>
-    <h1>Products Lists</h1>
-    <ul>
-      <% for (let prod of products) { %>
-      <a href="/products/<%= prod._id %>">
-        <li>
-          <p>Name : <%= prod.name %>,</p>
-          <p>Brand : <%= prod.brand %></p>
+    <section class="container">
+      <h1>Products Lists</h1>
+      <ol class="list-group list-group-numbered">
+        <% for (let prod of products) { %>
+        <li class="list-group-item">
+          <a href="/products/<%= prod._id %>">
+            <%= prod.name %> - <%= prod.brand %>
+          </a>
         </li>
-      </a>
-      <%}%>
-    </ul>
+        <%}%>
+      </ol>
+    </section>
+    <script src="/bootstrap.bundle.min.js"></script>
   </body>
 </html>
