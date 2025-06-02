@@ -34,10 +34,11 @@ app.get("/products", async (req, res) => {
     const { category } = req.query;
     if (category) {
       const products = await Product.find({ category }); //Memfilter product berdasarkan category
-      return res.render("products/lists", { products });
+      // console.log({ products, category });//buat cek kalau products sama category berhasil dikirim
+      return res.render("products/lists", { products, category });
     }
     const products = await Product.find({});
-    // console.log(products);
+    console.log(category);
     res.render("products/lists", { products });
   } catch (error) {
     console.error(error.message);
