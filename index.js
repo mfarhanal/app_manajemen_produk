@@ -98,6 +98,12 @@ app.put("/products/:id", async (req, res) => {
   }
 });
 
+app.delete("/products/:id", async (req, res) => {
+  const { id } = req.params;
+  const product = await Product.findByIdAndDelete(id);
+  res.redirect(`/products`);
+});
+
 app.listen(3000, () => {
   try {
     console.log("App listening on http://127.0.0.1:3000");
