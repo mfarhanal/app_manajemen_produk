@@ -12,6 +12,10 @@
         Products Lists <% if (typeof category !== "undefined" && category) { %>
         - <%= category %> <% } %>
       </h1>
+      <a href="/products/create" class="btn btn-outline-primary"
+        >Add Product
+      </a>
+
       <ol class="list-group list-group-numbered">
         <% for (let prod of products) { %>
         <li class="list-group-item">

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Product</title>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <h1>Add a product</h1>
+    <form action="/products" method="post">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control" />
+      <label for="brand" class="form-label">Brand</label>
+      <input type="text" name="brand" id="brand" class="form-control" />
+      <label for="price" class="form-label">Price</label>
+      <input type="number" name="price" id="price" class="form-control" />
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        name="description"
+        id="description"
+        rows="3"
+      ></textarea>
+      <select name="category" id="category">
+        Category
+        <option value="">Pilih Category</option>
+        <option value="Kesehatan">Kesehatan</option>
+        <option value="Makanan Ringan">Makanan Ringan</option>
+        <option value="Minuman">Minuman</option>
+        <option value="Sembako">Sembako</option>
+        <option value="Bahan Masak">Bahan Masak</option>
+        <option value="Lain Lain">Lain Lain</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </body>
+</html>

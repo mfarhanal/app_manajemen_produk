@@ -21,7 +21,7 @@ connectDB();
 // Setting view engine
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
@@ -34,12 +34,31 @@ app.get("/products", async (req, res) => {
     const { category } = req.query;
     if (category) {
       const products = await Product.find({ category }); //Memfilter product berdasarkan category
-      // console.log({ products, category });//buat cek kalau products sama category berhasil dikirim
+      console.log({ products, category }); //buat cek kalau products sama category berhasil dikirim
       return res.render("products/lists", { products, category });
     }
     const products = await Product.find({});
-    console.log(category);
+    console.log({ products, category });
     res.render("products/lists", { products });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+app.get("/products/create", (req, res) => {
+  try {
+    res.render("products/create");
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+app.post("/products", async (req, res) => {
+  try {
+    console.log(req.body);
+    const product = new Product(req.body);
+    await product.save();
+    res.redirect(`/products/${product._id}`);
   } catch (error) {
     console.error(error.message);
   }
