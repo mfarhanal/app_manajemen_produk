@@ -22,6 +22,7 @@ connectDB();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride("_method"));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
@@ -70,6 +71,28 @@ app.get("/products/:id", async (req, res) => {
     const product = await Product.findById(id);
     // console.log(product);
     res.render("products/details", { product });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+app.get("/products/:id/edit", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    res.render("products/edit", { product });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+app.put("/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findByIdAndUpdate(id, req.body, {
+      runValidators: true,
+    });
+    res.redirect(`/products/${product._id}`);
   } catch (error) {
     console.error(error.message);
   }

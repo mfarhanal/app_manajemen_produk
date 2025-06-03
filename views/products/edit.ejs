@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Product</title>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <h1>Add a product</h1>
+    <form action="/products/<%= product._id %>?_method=PUT"" method="post">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control" value="<%= product.name %>"/>
+      <label for="brand" class="form-label">Brand</label>
+      <input type="text" name="brand" id="brand" class="form-control" value="<%= product.brand %>"/>
+      <label for="price" class="form-label">Price</label>
+      <input type="number" name="price" id="price" class="form-control" value="<%= product.price %>"/>
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        name="description"
+        id="description"
+        rows="3"
+      value="<%= product.description %>"></textarea>
+      <select name="category" id="category">
+        Category
+        <option value="">Pilih Category</option>
+        <option value="Kesehatan" <%= product.category == 'Kesehatan' ? 'selected' : '' %>>Kesehatan</option>
+        <option value="Makanan Ringan" <%= product.category == 'Makanan Ringan' ? 'selected' : '' %>>Makanan Ringan</option>
+        <option value="Minuman" <%= product.category == 'Minuman' ? 'selected' : '' %>>Minuman</option>
+        <option value="Sembako" <%= product.category == 'Sembako' ? 'selected' : '' %>>Sembako</option>
+        <option value="Bahan Masak" <%= product.category == 'Bahan Masak' ? 'selected' : '' %>>Bahan Masak</option>
+        <option value="Lain Lain" <%= product.category == 'Lain Lain' ? 'selected' : '' %>>Lain Lain</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </body>
+</html>
